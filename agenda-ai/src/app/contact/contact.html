@@ -1,0 +1,207 @@
+  <app-navbar-auth></app-navbar-auth>
+
+<div class="flex flex-col justify-center items-center min-h-[93vh] bg-[#C7DED5] px-4 py-8">
+  <div class="w-full max-w-5xl bg-white shadow-xl rounded-xl p-6">
+
+    <!-- TÍTULO PADRONIZADO -->
+    <div class="border-b-2 border-[rgb(110,153,139)] pb-2 mb-6 text-center ">
+      <h1 class="text-2xl font-semibold text-[rgb(110,153,139)]">Fale conosco</h1>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- FORMULÁRIO -->
+      <div class="space-y-5">
+        <form [formGroup]="contatoRegisterForm" (ngSubmit)="resgiterContact()">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" formControlName="email" placeholder="Digite seu e-mail">
+          </div>
+
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999" formControlName="telefone">
+          </div>
+
+          <div class="form-group">
+            <label for="assunto">Assunto</label>
+            <select id="assunto" name="assunto" formControlName="assunto">
+              <option value="">Selecione um assunto</option>
+              <option value="duvida">Dúvida</option>
+              <option value="suporte">Suporte Técnico</option>
+              <option value="sugestao">Sugestão</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..." formControlName="mensagem"></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit" [disabled]="!contatoRegisterForm.valid">
+            Enviar mensagem
+          </button>
+        </form>
+      </div>
+
+      <!-- INFORMAÇÕES DE CONTATO -->
+      <div>
+        <h2 class="text-xl font-semibold text-[rgb(110,153,139)] mb-4">Informações de Contato</h2>
+
+        <div class="info-item">
+          <div class="info-icon">📧</div>
+          <div class="info-content">
+            <h3>E-mail</h3>
+            <p>contatoAagendaAI@empresa.com.br</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">📱</div>
+          <div class="info-content">
+            <h3>Telefone</h3>
+            <p>(16) 99999-9999</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">🕒</div>
+          <div class="info-content">
+            <h3>Horário de Atendimento</h3>
+            <p>Segunda à Sexta: 8h às 18h<br>Sábado: 8h às 12h</p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <h3>Siga-nos nas redes sociais:</h3>
+          <div class="social-icons">
+            <a href="#" class="social-icon" aria-label="Facebook">📘</a>
+            <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+            <a href="#" class="social-icon" aria-label="LinkedIn">💼</a>
+            <a href="#" class="social-icon" aria-label="WhatsApp">💬</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<style>
+    
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: rgb(110, 153, 139);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+
+  /* Placeholder color padronizada */
+  ::placeholder,
+  select:invalid {
+    color: rgb(110, 153, 139);
+    opacity: 0.7;
+  }
+
+  select option[value=""] {
+    color: rgb(110, 153, 139);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: rgb(110, 153, 139);
+    box-shadow: 0 0 0 3px rgba(110, 153, 139, 0.2);
+    outline: none;
+  }
+
+  .btn-submit {
+    background-color: rgb(110, 153, 139);
+    color: white;
+    font-weight: 600;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(110, 153, 139, 0.4);
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .info-icon {
+    width: 45px;
+    height: 45px;
+    background-color: rgb(110, 153, 139);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 15px;
+  }
+
+  .info-content h3 {
+    color: rgb(110, 153, 139);
+    margin-bottom: 4px;
+  }
+
+  .social-links h3 {
+    color: rgb(110, 153, 139);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(110, 153, 139);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .social-icon:hover {
+    transform: translateY(-3px);
+  }
+</style>

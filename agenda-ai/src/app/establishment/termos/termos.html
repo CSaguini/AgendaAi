@@ -1,0 +1,152 @@
+<app-navbar-auth></app-navbar-auth>
+
+<div class="flex flex-col justify-center items-center min-h-[93vh] bg-[#C7DED5] px-4 py-8">
+<div class="termos-container">
+  <div class="termos-card p-card">
+    <h2>Termos de Uso — AgendaAI</h2>
+
+    <h3>1. Objetivo</h3>
+    <p>
+      O <strong>AgendaAI</strong> é uma plataforma online que facilita o agendamento de serviços na área de estética, conectando profissionais e clientes de forma prática e segura.
+    </p>
+
+    <h3>2. Cadastro e Responsabilidade</h3>
+    <ul>
+      <li>O usuário deve fornecer informações verdadeiras, completas e atualizadas.</li>
+      <li>O usuário é responsável por manter a confidencialidade de seu login e senha.</li>
+      <li>O AgendaAI não se responsabiliza por dados incorretos fornecidos pelo usuário.</li>
+    </ul>
+
+    <h3>3. Funcionamento do Serviço</h3>
+    <p>
+      O AgendaAI atua como intermediário entre profissionais e clientes, disponibilizando ferramentas de agendamento e comunicação. O cumprimento dos serviços é de responsabilidade dos profissionais cadastrados.
+    </p>
+
+    <h3>4. Conduta do Usuário</h3>
+    <p>
+      É proibido utilizar o sistema para fins ilegais, inserir informações falsas ou tentar acessar áreas restritas do site.
+    </p>
+
+    <h3>5. Cancelamento e Exclusão de Conta</h3>
+    <p>
+      O usuário pode encerrar sua conta a qualquer momento. O AgendaAI reserva-se o direito de suspender contas que violem estes Termos.
+    </p>
+
+    <h3>6. Propriedade Intelectual</h3>
+    <p>
+      Todo o conteúdo do site, incluindo nome, logotipo, textos e design, pertence ao AgendaAI e é protegido por direitos autorais.
+    </p>
+
+    <h3>7. Alterações nos Termos</h3>
+    <p>
+      O AgendaAI pode alterar estes Termos a qualquer momento, e as mudanças entrarão em vigor assim que publicadas no site.
+    </p>
+
+    <div class="data"><em>Última atualização: outubro de 2025</em></div>
+
+    <button class="btn-concordar">Concordo com os Termos</button>
+  </div>
+</div>
+</div>
+
+<app-footer></app-footer>
+
+<style>
+
+  .termos-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(to bottom, rgba(110, 153, 139, 0.08), rgba(153, 197, 182, 0.05));
+  }
+
+  .termos-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    width: 100%;
+    padding: 35px 40px;
+    border: 1px solid #dfe7e4;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .termos-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .termos-card h2 {
+    color: rgb(43, 85, 69);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(153, 197, 182, 0.5);
+    padding-bottom: 10px;
+  }
+
+  .termos-card h3 {
+    color: rgb(51, 102, 85);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 10px;
+  }
+
+  .termos-card p,
+  .termos-card li {
+    color: #444;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .termos-card ul {
+    margin-left: 22px;
+  }
+
+  .termos-card strong {
+    color: rgb(43, 85, 69);
+  }
+
+  .termos-card .data {
+    text-align: right;
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #777;
+    border-top: 1px solid #e3ece9;
+    padding-top: 10px;
+  }
+
+  /* Botão de concordar */
+  .btn-concordar {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 30px;
+    background-color: rgb(110, 153, 139);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 3px 8px rgba(110, 153, 139, 0.25);
+  }
+
+  .btn-concordar:hover {
+    background-color: rgb(92, 132, 120);
+    box-shadow: 0 4px 10px rgba(110, 153, 139, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .termos-card {
+      padding: 25px;
+    }
+
+    .termos-card h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

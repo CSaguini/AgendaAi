@@ -1,0 +1,20 @@
+<nav class="w-full h-20 flex items-center justify-between p-4 bg-[#648f80]">
+  <!-- Logo -->
+  <div class="text-3xl font-extrabold cursor-pointer text-white tracking-tight">
+    <span class="font-black text-transparent bg-gradient-to-b from-white to-blue-300 bg-clip-text">
+      AgendaAi
+    </span>
+  </div>
+
+  <!-- Área direita: links + login -->
+  <div class="flex items-center space-x-6">
+    <!-- Links -->
+    <ul class="flex space-x-8 font-semibold text-white text-lg">
+      <li class="cursor-pointer  px-2 py-1 rounded transition-colors duration-200" routerLink="/admin/companies">Empresas</li>
+      <li class="cursor-pointer  py-1 rounded transition-colors duration-200" routerLink="/admin/users">Usuarios</li>
+      <li class="cursor-pointer  px-2 py-1 rounded transition-colors duration-200" routerLink="/admin/complaints">Reclamações</li>
+      <button class="bg-red-600 text-white w-20 rounded-md" (click)="logout()"> Sair </button>
+
+    </ul>
+  </div>
+</nav>

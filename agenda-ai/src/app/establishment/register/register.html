@@ -1,0 +1,79 @@
+<app-navbar-auth></app-navbar-auth>
+<p-toast></p-toast>
+
+<div class="relative min-h-screen bg-[#C7DED5]  flex flex-col items-center py-6 px-4 sm:px-6 lg:px-8">
+  <!-- Form container -->
+  <div class="w-full max-w-3xl bg-white rounded-xl shadow-2xl p-6 sm:p-8">
+    <p-card header="Cadastro de Estabelecimento" class="p-card-header-sm !bg-white !text-[#648f80]"
+      [style]="{ 'border': 'none'}">
+
+      <form [formGroup]="entrepreneurRegisterForm" (ngSubmit)="registerEntrepreneur()" class="border-none">
+
+        <!-- Dados do Estabelecimento -->
+        <h3 class="text-xl font-semibold mb-4 text-[#648f80]">Dados do Estabelecimento</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <input pInputText placeholder="Nome do Estabelecimento *" formControlName="name"
+            class="w-full !bg-white !text-[#648f80] border border-[#648f80] rounded p-2" /> 
+          <p-inputMask mask="999.999.999-99" formControlName="cpf" placeholder="999.999.999-99"
+            class="w-full !bg-white !text-[#648f80]  border-[#648f80] rounded p-2"
+            [style]="{ 'background-color': '#ffffff', 'color': '#648f80', 'border-radius': '0.375rem', 'border': '1px solid #648f80' }"></p-inputMask>
+        </div>
+
+        <!-- Contato -->
+        <h3 class="text-xl font-semibold mb-4 text-[#648f80]">Contato</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <p-inputMask mask="(99) 99999-9999" formControlName="telefone" placeholder="(16)-99324-2138"
+            class="w-full !bg-white !text-[#648f80] border-[#648f80] rounded p-2"
+            [style]="{ 'background-color': '#ffffff', 'color': '#648f80', 'border-radius': '0.375rem', 'border': '1px solid #648f80' }"></p-inputMask>
+            <label class="block font-semibold mt-2">Imagem da empresa:</label>
+        </div>
+
+        <!-- Endereço -->
+        <h3 class="text-xl font-semibold mb-4 text-[#648f80]">Endereço</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <p-inputMask mask="99999-999" formControlName="cep" placeholder="14834-080"
+            (onBlur)="buscarEndereco()"
+            class="w-full !bg-white !text-[#648f80]  border-[#648f80] rounded p-2"
+            [style]="{ 'background-color': '#ffffff', 'color': '#648f80', 'border-radius': '0.375rem', 'border': '1px solid #648f80' }"></p-inputMask>
+          <input pInputText placeholder="Rua *" formControlName="rua"
+            class="w-full !bg-white !text-[#648f80] border border-[#648f80] rounded p-2" />
+          <input pInputText placeholder="Número *" formControlName="numero"
+            class="w-full !bg-white !text-[#648f80] border border-[#648f80] rounded p-2" />
+          <input pInputText placeholder="Complemento" formControlName="comple"
+            class="w-full !bg-white !text-[#648f80] border border-[#648f80] rounded p-2" />
+          <input pInputText placeholder="Bairro *" formControlName="bairro"
+            class="w-full !bg-white !text-[#648f80] border border-[#648f80] rounded p-2" />
+          <input pInputText placeholder="Cidade *" formControlName="cidade"
+            class="w-full !bg-white !text-[#648f80] border border-[#648f80] rounded p-2" />
+          <select formControlName="estado" class="w-full p-2 border border-[#648f80] rounded text-[#648f80]">
+            <option value="" disabled>Selecione o Estado</option>
+            <option *ngFor="let s of states" [value]="s.value">{{ s.name }}</option>
+          </select>
+        </div>
+
+        <!-- Termos -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center mb-4 gap-2">
+          <p-checkbox formControlName="termos" [binary]="true" class="mr-2"></p-checkbox>
+          <span class="text-[#648f80] text-sm">
+            Concordo com os
+            <a routerLink="/establishment/termos" class="underline">Termos de Uso</a> e
+            <a routerLink="/'establishment/politicas" class="underline">Política de Privacidade</a> *
+          </span>
+        </div>
+
+        <!-- Botões -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button pButton type="button" label="Limpar" severity="secondary" outlined
+            class="w-full sm:w-auto border-[#648f80] text-[#648f80] hover:bg-[#648f80] hover:text-white"
+            (click)="clearForm()"></button>
+
+          <button pButton type="submit" label="Cadastrar" severity="primary"
+            class="w-full sm:w-auto bg-[#648f80] border-[#648f80] text-white hover:bg-white hover:text-[#648f80]"
+            [disabled]="!entrepreneurRegisterForm.valid"></button>
+        </div>
+
+      </form>
+    </p-card>
+  </div>
+</div>
+<app-footer></app-footer>

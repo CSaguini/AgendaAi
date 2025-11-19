@@ -1,0 +1,76 @@
+<app-navbar-adm></app-navbar-adm>
+
+<!-- MAIN: -->
+<main class="flex flex-col items-center min-h-[91vh] bg-[#C7DED5] px-3 py-8">
+
+  <!-- Título principal -->
+  <h1 class="text-2xl font-bold mb-8">Gerenciamento de Usuários</h1>
+
+  <!-- Se existir usuários, monta a listagem; senão, exibe o estado de carregamento -->
+  <ng-container *ngIf="users.length > 0; else carregando">
+
+    <!-- SECTION contendo a lista -->
+    <section class="w-full max-w-6xl">
+
+      <!-- Lista semântica usando UL -->
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Cada usuário vira um LI contendo um ARTICLE -->
+        <li *ngFor="let user of users">
+
+          <!-- ARTICLE: card individual do usuário -->
+          <article
+            class="bg-white shadow-md rounded-xl p-5 border border-gray-200 flex flex-col gap-4">
+
+            <!-- Cabeçalho do card -->
+            <header>
+              <h2 class="text-lg font-semibold text-gray-800">
+                {{ user?.name }}
+              </h2>
+            </header>
+
+            <!-- Informações -->
+            <p class="text-gray-800"><strong>Email:</strong> {{ user?.email }}</p>
+
+            <!-- Rodapé com ações -->
+            <footer class="flex gap-2 mt-2">
+              <!-- Botão Ativar -->
+              <button
+                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition-colors flex-1"
+                  *ngIf="!user.isActive"
+                  label="Ativar" 
+                  icon="pi pi-check" 
+                  (click)="alterarStatus(user._id, true)">
+                Ativar
+              </button>
+
+              <!-- Botão Desativar -->
+              <button
+                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition-colors flex-1"
+                  *ngIf="user.isActive"
+                  label="Inativar" 
+                  icon="pi pi-ban" 
+                  (click)="alterarStatus(user._id, false)">
+                Desativar
+              </button>
+            </footer>
+
+          </article>
+        </li>
+
+      </ul>
+
+    </section>
+
+  </ng-container>
+
+  <!-- Template mostrado enquanto carrega usuários -->
+  <ng-template #carregando>
+    <section class="py-8">
+      <p class="text-center text-gray-700 text-lg">Carregando contatos...</p>
+    </section>
+  </ng-template>
+
+</main>
+
+<app-footer></app-footer>

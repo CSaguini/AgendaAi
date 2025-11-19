@@ -1,0 +1,71 @@
+<app-navbar-adm></app-navbar-adm>
+
+<!-- MAIN  -->
+<main class="flex flex-col items-center min-h-[91vh] bg-[#C7DED5] px-3 py-8">
+
+  <!-- Título da página -->
+  <h1 class="text-2xl font-bold mb-6">Gerenciamento de Reclamações</h1>
+
+  <!-- Se houver reclamações, exibe; senão, mostra template de carregamento -->
+  <ng-container *ngIf="contato.length > 0; else carregando">
+
+    <!-- SECTION -->
+    <section class="w-full max-w-7xl">
+
+      <!-- UL – Lista semântica -->
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+
+        <!-- Cada reclamação vira um LI contendo um ARTICLE -->
+        <li *ngFor="let item of contato" class="h-full" role="listitem">
+
+          <!-- ARTICLE – Card da reclamação -->
+          <article
+            class="p-5 border border-gray-200 rounded-2xl bg-white shadow-sm hover:shadow-md 
+                   transition-all flex flex-col h-64">
+
+            <!-- Conteúdo do card -->
+            <div class="flex-1 overflow-hidden">
+
+              <!-- Cabeçalho -->
+              <header class="mb-2">
+                <h2 class="text-lg font-semibold">Reclamação</h2>
+              </header>
+
+              <!-- Área rolável do conteúdo -->
+              <div class="flex flex-col gap-1 overflow-y-auto pr-1" style="max-height: 140px;">
+                <p><strong>Email:</strong> {{ item?.email }}</p>
+                <p><strong>Telefone:</strong> {{ item?.telefone }}</p>
+                <p><strong>Assunto:</strong> {{ item?.assunto }}</p>
+                <p><strong>Mensagem:</strong> {{ item?.mensagem }}</p>
+              </div>
+
+            </div>
+
+            <!-- Botão fixo ao final do card -->
+            <footer class="mt-3">
+              <button
+                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md 
+                       transition-colors w-full">
+                Solucionar Problema
+              </button>
+            </footer>
+
+          </article>
+
+        </li>
+
+      </ul>
+
+    </section>
+
+  </ng-container>
+
+  <!-- Template exibido enquanto carrega -->
+  <ng-template #carregando>
+    <section class="py-10">
+      <p class="text-gray-700 text-lg">Carregando contatos...</p>
+    </section>
+  </ng-template>
+
+</main>
+<app-footer></app-footer>

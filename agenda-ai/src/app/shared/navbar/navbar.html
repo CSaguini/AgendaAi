@@ -1,0 +1,33 @@
+<nav class="w-full h-20 flex items-center justify-between p-4 bg-[#648f80]">
+  <!-- Logo -->
+<div class="text-3xl font-extrabold cursor-pointer text-white tracking-tight">
+  <span class="font-black text-transparent bg-gradient-to-b from-white to-blue-300 bg-clip-text">AgendaAi</span>
+</div>
+
+  <!-- Área direita: links + login -->
+  <div class="flex items-center space-x-6">
+    <!-- Links -->
+    <ul class="flex space-x-8 font-semibold text-white text-lg">
+      <li class="cursor-pointer  py-1 rounded transition-colors duration-200" routerLink="/contact">Contato</li>
+      <li class="cursor-pointer  px-2 py-1 rounded transition-colors duration-200" routerLink="/about">Sobre</li>
+      <li class="cursor-pointer  px-2 py-1 rounded transition-colors duration-200" routerLink="/establishment/pre-scheduling">Empresa</li>
+      @if(!logged) {
+      <li class="cursor-pointer hover:bg-[rgba(153,197,182,1)] px-2 py-1 rounded transition-colors duration-200"
+        routerLink="/login">Login</li>
+      }
+    </ul>
+
+    <!-- Speeddial (usuário logado) -->
+    @if(logged) {
+    <ng-container>
+      <p-speeddial class="w-10 h-9" [model]="items" direction="down" [transitionDelay]="80">
+        <ng-template #button let-toggleCallback="toggleCallback">
+          <p-button outlined styleClass="border" (click)="toggleCallback($event)">
+            {{primary_letter}}
+          </p-button>
+        </ng-template>
+      </p-speeddial>
+    </ng-container>
+    }
+  </div>
+</nav>

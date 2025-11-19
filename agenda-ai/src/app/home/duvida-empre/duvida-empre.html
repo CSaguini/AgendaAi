@@ -1,0 +1,297 @@
+<app-navbar-auth></app-navbar-auth>
+ <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7f6 0%, #f0f3f2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            color: #2d5a4f;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #648f80;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            margin-top: 50px;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(45, 90, 79, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(45, 90, 79, 0.12);
+        }
+
+        .step.reverse {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .step.reverse .step-image {
+            order: 2;
+        }
+
+        .step.reverse .step-content {
+            order: 1;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #648f80;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .step-content h2 {
+            color: #2d5a4f;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .step-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .step-features li {
+            color: #648f80;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-features li:before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #e8f3f0;
+            color: #648f80;
+            border-radius: 50%;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .step-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            background: linear-gradient(135deg, #e8f3f0 0%, #d4e9e3 100%);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .step-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .step-button {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #648f80;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .step-button:hover {
+            background: #2d5a4f;
+            transform: translateX(5px);
+        }
+
+        .step-button.secondary {
+            background: #2d5a4f;
+            margin-left: 10px;
+        }
+
+        .step-button.secondary:hover {
+            background: #1a3a32;
+        }
+
+        @media (max-width: 768px) {
+            .step {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px 20px;
+            }
+
+            .step.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .step.reverse .step-image {
+                order: 1;
+            }
+
+            .step.reverse .step-content {
+                order: 2;
+            }
+
+            .step-image {
+                min-height: 250px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .step-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .steps-container {
+                gap: 50px;
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+    </style>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cadastro de Empresa</h1>
+            <p>Siga o passo a passo simples e intuitivo para registrar sua empresa em nossa plataforma</p>
+        </div>
+
+        <div class="steps-container">
+            <!-- Passo 1: Imagem à esquerda, Texto à direita -->
+            <div class="step">
+                <div class="step-image">
+                    <img src="/placeholder.svg?height=400&width=400" alt="Formulário de informações">
+                </div>
+                <div class="step-content">
+                    <span class="step-number">1</span>
+                    <h2>Informações Básicas</h2>
+                    <p>Comece preenchendo os dados fundamentais da sua empresa. Essas informações serão a base do seu cadastro.</p>
+                    <ul class="step-features">
+                        <li>Nome e razão social da empresa</li>
+                        <li>CNPJ válido e comprovante de registro</li>
+                        <li>Endereço completo da matriz</li>
+                        <li>Telefone de contato principal</li>
+                        <li>Website e redes sociais (opcional)</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="step-button">Começar Cadastro</button>
+                        <button class="step-button secondary">Saiba Mais</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passo 2: Texto à esquerda, Imagem à direita (REVERSE) -->
+            <div class="step reverse">
+                <div class="step-content">
+                    <span class="step-number">2</span>
+                    <h2>Verificação e Documentos</h2>
+                    <p>Faça upload dos documentos necessários para validar sua empresa. Todos os dados são criptografados e seguros.</p>
+                    <ul class="step-features">
+                        <li>Contrato social atualizado</li>
+                        <li>Comprovante de endereço recente</li>
+                        <li>Identificação do responsável legal</li>
+                        <li>Comprovante de capacidade financeira</li>
+                        <li>Certificado digital (A1 ou A3)</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="step-button">Enviar Documentos</button>
+                        <button class="step-button secondary">Voltar</button>
+                    </div>
+                </div>
+                <div class="step-image">
+                    <img src="/placeholder.svg?height=400&width=400" alt="Verificação de documentos">
+                </div>
+            </div>
+
+            <!-- Passo 3: Imagem à esquerda, Texto à direita -->
+            <div class="step">
+                <div class="step-image">
+                    <img src="/placeholder.svg?height=400&width=400" alt="Configuração de acesso">
+                </div>
+                <div class="step-content">
+                    <span class="step-number">3</span>
+                    <h2>Configurar Equipe e Acessos</h2>
+                    <p>Adicione membros da sua equipe e defina os níveis de acesso e permissões de cada um.</p>
+                    <ul class="step-features">
+                        <li>Criar conta de administrador</li>
+                        <li>Adicionar membros da equipe</li>
+                        <li>Definir roles e permissões</li>
+                        <li>Configurar autenticação em duas etapas</li>
+                        <li>Integrar com SSO (Single Sign-On)</li>
+                    </ul>
+                    <div class="button-group">
+                        <button class="step-button">Gerenciar Equipe</button>
+                        <button class="step-button secondary">Próximos Passos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<app-footer></app-footer>

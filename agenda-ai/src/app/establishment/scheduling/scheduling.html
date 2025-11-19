@@ -1,0 +1,101 @@
+<app-navbar-auth></app-navbar-auth>
+<p-toast></p-toast>
+
+<div class="flex items-center justify-center min-h-screen bg-[#C7DED5]">
+  <p-card header="Agendamento" class="w-full max-w-lg">
+
+    <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+
+    <form [formGroup]="schedulingRegisterForm" (ngSubmit)="RegisterScheduling()" *ngIf="!loading">
+
+      <h2 class="text-xl font-bold mb-4 text-black">Informações Pessoais</h2>
+
+      <div class="mb-4">
+        <label class="block font-semibold mb-1 text-black">Nome:</label>
+        <input class="w-full border border-black rounded px-3 py-2 text-black" formControlName="name" />
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-semibold mb-1 text-black">Idade:</label>
+        <input class="w-full border border-black rounded px-3 py-2 text-black" formControlName="age"/>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-semibold mb-1 text-black">Descrição:</label>
+        <input class="w-full border border-black rounded px-3 py-2 text-black" formControlName="descricao"/>
+      </div>
+
+      <div class="mb-6">
+        <label class="block font-semibold mb-1 text-black">Imagem (Link):</label>
+        <input class="w-full border rounded px-3 py-2 border-black text-black" formControlName="imagem"/>
+      </div>
+
+      <p-divider></p-divider>
+
+      <h2 class="text-xl font-bold mb-4 text-black">Escolha Data e Hora</h2>
+
+      <div class="mb-6">
+        <label class="block font-semibold mb-2 text-black">Data:</label>
+
+        <p-datepicker
+          [(ngModel)]="dataSelecionada"
+          (onSelect)="onDiaSelecionado($event)"
+          [inline]="true"
+          [readonlyInput]="true"
+          [dateFormat]="'dd/mm/yy'"
+          [ngModelOptions]="{standalone: true}"
+        >
+          <ng-template pTemplate="date" let-date>
+            <span [ngClass]="{ 'dia-disponivel': isDateAvailable(date)}">
+              {{ date.day }}
+            </span>
+          </ng-template>
+        </p-datepicker>
+      </div>
+
+      <p-divider></p-divider>
+
+      <div *ngIf="dataSelecionada" class="mb-6">
+        <label class="block font-semibold mb-2 text-black">Horários Disponíveis:</label>
+
+        <div *ngIf="horariosDoDia.length > 0; else semHorarios" class="flex flex-wrap gap-2">
+          <p-button
+            *ngFor="let h of horariosDoDia"
+            [label]="h"
+            (onClick)="selecionarHorario(h)"
+            [styleClass]="h === horarioSelecionado ? 'p-button-success' : 'p-button-secondary p-button-outlined'"
+          ></p-button>
+        </div>
+
+        <ng-template #semHorarios>
+          <p class="text-red-500">Nenhum horário disponível para este dia.</p>
+        </ng-template>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-[#648f80] text-white font-bold py-3 rounded-lg hover:bg-[#648f90]"
+        [disabled]="schedulingRegisterForm.invalid || !dataSelecionada || !horarioSelecionado || loading">
+        Confirmar Agendamento
+      </button>
+
+    </form>
+
+  </p-card>
+</div>
+
+<app-footer></app-footer>
+
+<style>
+  .dia-disponivel {
+    background-color: #92e092;
+    border-radius: 50%;
+    padding: 5px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+  }
+  .dia-disponivel:hover {
+    background-color: #6fb96f;
+  }
+</style>

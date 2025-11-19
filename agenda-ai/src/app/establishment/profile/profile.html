@@ -1,0 +1,225 @@
+<div class="w-full min-h-screen bg-[#C7DED5]">
+  <!-- Navbar -->
+  <nav class="w-full flex flex-col md:flex-row py-2 items-center justify-between bg-[#648f80] min-h-20 px-4">
+    <div class="gap-3 flex items-center">
+      <!-- Botão Voltar -->
+      <a routerLink="/" class="text-white text-xl md:text-2xl">
+        <i class="pi pi-arrow-left"></i>
+      </a>
+
+      <!-- Logo -->
+  <div class="text-3xl font-extrabold cursor-pointer text-white tracking-tight">
+    <span class="font-black text-transparent bg-gradient-to-b from-white to-blue-300 bg-clip-text">
+      AgendaAi
+    </span>
+  </div>
+    </div>
+
+    <!-- Ações -->
+    <div class="w-full flex flex-col md:flex-row justify-end items-center mt-3 md:mt-0 md:pr-10">
+      <div class="card flex justify-center">
+       
+
+      <!-- SpeedDial -->
+      <p-speeddial 
+        *ngIf="logged" 
+        [model]="speedDialItems" 
+        direction="down" 
+        [transitionDelay]="80"
+        class="absolute right-4 top-4.5">
+        
+        <ng-template pTemplate="button" let-toggleCallback="toggleCallback">
+          <p-button outlined class="!border-none" (click)="toggleCallback($event)">
+            {{ primary_letter }}
+          </p-button>
+        </ng-template>
+        <ng-template pTemplate="item" let-item let-toggleCallback="toggleCallback">
+          <div
+            class="flex items-center justify-center py-2 rounded bg-[#648f80] text-white shadow cursor-pointer text-center w-[70px]"
+            (click)="toggleCallback($event, item)">
+            <i [class]="item.icon"></i>
+            <span class="whitespace-nowrap">{{ item.label }}</span>
+          </div>
+        </ng-template>
+      </p-speeddial>
+    </div>
+    </div>
+  </nav>
+
+<!-- CONTAINER DOS DOIS CARDS LADO A LADO -->
+<div class="flex gap-6 mx-6 mt-8">
+
+  <!-- Card da Empresa -->
+  <div *ngIf="empresa; else carregando" class="w-1/2">
+    <div 
+      class="h-52 bg-cover bg-center rounded-t-2xl flex items-end p-4 border border-gray-300 shadow-md"
+      [ngStyle]="{'background-image': 'url(' + empresa.imagem + ')'}">
+    </div>
+
+    <div class="p-5 border-x border-b border-gray-300 rounded-b-2xl bg-white shadow-sm space-y-1">
+      <p><strong>Nome:</strong> {{ empresa.name }}</p>
+      <p><strong>Cidade:</strong> {{ empresa?.cidade }} - {{ empresa.estado }}</p>
+      <p><strong>Bairro:</strong> {{ empresa.bairro }}</p>
+      <p><strong>Endereço:</strong> {{ empresa.rua }}, {{ empresa.numero }}</p>
+      <p><strong>Telefone:</strong> {{ empresa.telefone }}</p>
+    </div>
+  </div>
+
+  <!-- Card de Criar Serviço -->
+  <div class="w-1/2 p-5 border border-gray-300 rounded-2xl bg-white shadow-md">
+    
+    <!-- TEXTO -->
+   <h1> Cadastrar serviços</h1>
+    <p class="text-gray-600 mb-4">
+      Aqui você pode cadastrar novos serviços oferecidos pela sua empresa. 
+      Defina nome, categoria, horários e dias de funcionamento. 
+      faça uma descrição detalhada para atrair mais clientes!, e gerencie seus serviços facilmente.
+        Veja abaixo os serviços já cadastrados e utilize os botões para editar ou excluir conforme necessário.
+      <br>
+      <strong>Atenção</strong>
+      <br>
+      Certifique-se de preencher os horários e dias corretamente para evitar conflitos de agendamento.
+    </p>
+
+    <!-- Botão -->
+    <p-button 
+      (click)="showDialog()" 
+      label="Criar Serviço" 
+      class="!bg-[#648f80] !text-white hover:!bg-[#4f7468] mb-4"
+    />
+
+    <!-- Modal funcionando -->
+    <form [formGroup]="servicesEntreprenuer" (ngSubmit)="registerServiceEntreprenuer()">
+      <p-dialog header="Cadastro de Serviço" [modal]="true" [(visible)]="visible"
+        [style]="{ width: '90%', maxWidth: '40rem', height: '100vh'}">
+
+        <span class="p-text-secondary block mb-4 text-[#648f80]">
+          Preencha as informações do seu serviço de estética e beleza
+        </span>
+
+        <!-- Informações do Serviço -->
+        <div class="w-full px-3 space-y-4 border border-zinc-800 p-4 rounded-2xl">
+          <h1 class="text-lg font-semibold">Informações do Serviço</h1>
+
+          <div class="flex flex-col md:flex-row gap-3">
+            <div class="w-full md:w-[60%] flex flex-col">
+              <label>Nome do Serviço</label>
+              <input type="text" pInputText formControlName="nome"/>
+            </div>
+
+            <div class="w-full md:w-1/3 flex flex-col">
+              <label>Categoria</label>
+              <p-select 
+                [options]="categories" 
+                [checkmark]="true" 
+                [showClear]="true"
+                placeholder="Selecione a categoria" 
+                class="w-full" 
+                formControlName="categoria"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-3">
+            <div class="w-full md:w-[60%] flex flex-col">
+              <label>Descrição do Serviço</label>
+              <input type="text" pInputText formControlName="descricao"/>
+            </div>
+            <div class="w-full md:w-[39%] flex flex-col">
+              <label>Duração (minutos)</label>
+              <input type="number" pInputText formControlName="duracao"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horários -->
+        <div class="w-full px-3 mt-5 space-y-2 py-3 border border-zinc-800 p-4 rounded-2xl">
+          <h1 class="mb-2 font-semibold">Horarios de Funcionamento</h1>
+          <div *ngFor="let time of time" class="flex items-center">
+            <p-checkbox [inputId]="time.id" name="group" [value]="time" formControlName="time"/>
+            <label [for]="time.id" class="ml-2">{{ time.label }}</label>
+          </div>
+        </div>
+
+        <!-- Dias -->
+        <div class="w-full px-3 mt-5 space-y-2 py-3 border border-zinc-800 p-4 rounded-2xl">
+          <h1 class="mb-2 font-semibold">Dias de Funcionamento</h1>
+          <div *ngFor="let day of daysOfWeek" class="flex items-center">
+            <p-checkbox [inputId]="day.id" name="group" [value]="day" formControlName="dias"/>
+            <label [for]="day.id" class="ml-2">{{ day.label }}</label>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="flex flex-col md:flex-row justify-end gap-3 mt-5">
+          <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+          <p-button label="Criar" type="submit" class="!bg-[#648f80] !text-white hover:!bg-[#4f7468]" [disabled]="!servicesEntreprenuer.valid"/>
+        </div>
+      </p-dialog>
+    </form>
+  </div>
+
+</div>
+
+
+  <!-- Cards de Serviços -->
+  <div *ngIf="getServicesEntreprenuer; else carregando" class="mt-8 mx-6 grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div 
+      *ngFor="let service of getServicesEntreprenuer || []"
+      class="p-5 border border-gray-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all"
+    >
+      <h3 class="text-lg font-semibold text-[#648f80] mb-2">{{ service.nome }}</h3>
+      <p><strong>Categoria:</strong> {{ service.categoria }}</p>
+      <p><strong>Descrição:</strong> {{ service.descricao }}</p>
+      <p><strong>Duração:</strong> {{ service.duracao }} minutos</p>
+
+      <div class="mt-3">
+        <p *ngFor="let data of service.dias" class="text-sm"><strong>Dia:</strong> {{ data.label }}</p>
+        <p *ngFor="let data of service.time" class="text-sm"><strong>Horário:</strong> {{ data.label }}</p>
+      </div>
+      <div class="mt-4 flex gap-3">
+       <button (click)="editarServico(service)" class="bg-blue-600 text-white px-3 py-1 rounded">
+      Editar
+        </button>
+      <button 
+  (click)="excluirServico(service._id)"
+  class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm">
+  Excluir
+</button>
+    </div>
+    </div>
+  </div>
+
+  <ng-template #carregando>
+    <p class="text-center text-gray-500 mt-10">Carregando dados...</p>
+  </ng-template>
+
+
+<!-- FORMULÁRIO DE EDIÇÃO -->
+<div *ngIf="mostrarFormularioEdicao" class="mt-6 p-5 border bg-white shadow rounded-xl">
+  <h3 class="text-lg font-semibold text-[#648f80] mb-4">Editar Serviço</h3>
+
+  <label class="block mb-1 text-sm">Nome</label>
+  <input type="text" [(ngModel)]="servicoSelecionado.nome" class="border p-2 w-full rounded mb-3"/>
+
+  <label class="block mb-1 text-sm">Categoria</label>
+  <input type="text" [(ngModel)]="servicoSelecionado.categoria" class="border p-2 w-full rounded mb-3"/>
+
+  <label class="block mb-1 text-sm">Descrição</label>
+  <textarea [(ngModel)]="servicoSelecionado.descricao" class="border p-2 w-full rounded mb-3"></textarea>
+
+  <label class="block mb-1 text-sm">Duração (minutos)</label>
+  <input type="number" [(ngModel)]="servicoSelecionado.duracao" class="border p-2 w-full rounded mb-3"/>
+
+  <div class="flex gap-3 mt-4">
+    <button (click)="salvarEdicao()" class="bg-green-600 text-white px-4 py-2 rounded">
+      Salvar
+    </button>
+
+    <button (click)="cancelarEdicao()" class="bg-red-600 text-white px-4 py-2 rounded">
+      Cancelar
+    </button>
+  </div>
+</div>
+
+</div>

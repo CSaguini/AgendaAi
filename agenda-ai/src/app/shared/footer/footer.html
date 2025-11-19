@@ -1,0 +1,150 @@
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Logo + links principais -->
+    <div class="footer-left">
+      <div class="footer-logo">AgendaAI</div>
+      <nav class="footer-nav">
+        <a href="#">Contato</a>
+        <a href="#">Sobre</a>
+        <a href="#">Empresa</a>
+      </nav>
+    </div>
+
+    <!-- Contato -->
+    <div class="footer-column">
+      <h4>Entre em contato:</h4>
+      <a href="mailto:AgendaAI@gmail.com" class="footer-contact">AgendaAI@gmail.com</a>
+      <a href="tel:+5516999999999" class="footer-contact">(16) 99999-9999</a>
+    </div>
+
+    <!-- Redes sociais -->
+    <div class="footer-column">
+      <h4>Siga nas redes sociais:</h4>
+      <div class="social-links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Footer fixo e minimalista */
+  .footer {
+   
+    bottom: 0;
+    width: 100%;
+    background-color: #648f80;
+    color: white;
+    padding: 1.5rem 0;
+    font-family: Arial, sans-serif;
+    z-index: 100;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 2rem;
+    align-items: flex-start;
+  }
+
+  /* Logo textual */
+  .footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  /* Links principais */
+  .footer-nav a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .footer-nav a:hover {
+    background-color: rgba(153,197,182,1);
+    color: white;
+  }
+
+  /* Contato e telefone padronizados */
+  .footer-contact {
+    display: inline-block;
+    margin: 4px 0;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .footer-contact:hover {
+    background-color: rgba(153,197,182,1);
+    color: white;
+  }
+
+  /* Colunas de contato e redes sociais */
+  .footer-column h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /* Redes sociais destacadas */
+  .social-links a {
+    display: inline-block;
+    margin: 4px 4px 0 0;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: transparent;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .social-links a:hover {
+    background-color: rgba(153,197,182,1);
+    color: white;
+  }
+
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-left,
+    .footer-column {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .footer-nav a {
+      margin-right: 10px;
+      margin-bottom: 4px;
+    }
+
+    .social-links a,
+    .footer-contact {
+      margin-right: 8px;
+      margin-bottom: 4px;
+    }
+  }
+</style>

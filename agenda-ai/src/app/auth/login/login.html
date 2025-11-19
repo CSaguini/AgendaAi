@@ -1,0 +1,194 @@
+
+
+<app-navbar-auth></app-navbar-auth>
+
+<body class="font-sans bg-[#C7DED5]">
+<div class="flex flex-col justify-center items-center min-h-screen p-4">
+    <p-toast></p-toast>
+
+    <!-- CARD -->
+    <div class="flex flex-col md:flex-row w-full max-w-3xl bg-white shadow-2xl rounded-xl overflow-hidden">
+        
+        <!-- 🖼️ Coluna da Esquerda (imagem com PrimeNG) -->
+      <div class="flex md:w-1/2 min-h-[420px] items-center justify-center bg-gray-50"
+     style="background-image: url('assets/imagem2.jpg'); background-size: cover; background-position: center;">
+</div>
+
+
+        <!-- Coluna da Direita -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center items-center p-6 md:p-10">
+            <div class="w-full max-w-xs flex flex-col items-center gap-6">
+                
+                <h1 class="text-2xl font-semibold text-center border-b-2 border-gray-200 pb-2 w-full mb-2" 
+                    style="color: rgb(110, 153, 139);">
+                    Preencha com seus dados:
+                </h1>
+
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full flex flex-col gap-4">
+                    
+                    <!-- Email -->
+                    <div class="flex flex-col gap-1 w-full">
+                        <label for="email" class="text-sm font-medium text-gray-700">Email</label>
+                        <input 
+                            pInputText 
+                            id="email" 
+                            type="email" 
+                            placeholder="email@exemplo.com" 
+                            formControlName="email" 
+                            [invalid]="isInvalid('email')" 
+                            class="input-field" 
+                        />
+                        <ng-container *ngIf="isInvalid('email')">
+                            <p-message *ngIf="loginForm.get('email')?.errors?.['required']" severity="error" size="small" variant="simple">
+                                Email é obrigatório.
+                            </p-message>
+                            <p-message *ngIf="loginForm.get('email')?.errors?.['email']" severity="error" size="small" variant="simple">
+                                Por favor, digite um email válido.
+                            </p-message>
+                        </ng-container>
+                    </div>
+
+                    <!-- Senha -->
+                    <div class="flex flex-col gap-1 w-full">
+                        <label for="password" class="text-sm font-medium text-gray-700">Senha</label>
+                        <p-password 
+                            formControlName="password"
+                            id="password"
+                            placeholder="••••••••"
+                            [feedback]="false"
+                            [toggleMask]="true"
+                            [inputStyleClass]="'input-field password-input'"
+                        ></p-password>
+                        <p-message *ngIf="isInvalid('password')" severity="error" size="small" variant="simple">
+                            Senha é obrigatória.
+                        </p-message>
+                    </div>
+
+                    <div class="flex justify-end items-center w-full text-sm mt-1">
+                        <a routerLink="/forgot-password" class="link-footer text-xs font-normal">Esqueceu a Senha?</a>
+                    </div>
+
+                    <button pButton type="submit" class="footer-button mt-3">
+                        Entrar
+                    </button>
+                    
+                    <div class="flex flex-col items-center gap-2 text-center w-full mt-3">
+                        <p class="text-sm text-gray-600">
+                            Ainda não tem uma conta? 
+                            <a routerLink="/register" class="link-footer font-semibold no-underline">Cadastre-se</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<app-footer></app-footer>
+
+<style>
+    :root {
+        --color-primary: #6E998B;
+        --color-primary-dark: #588073;
+    }
+
+    .input-field {
+        background-color: white;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-size: 15px;
+        color: black;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        width: 100%;
+    }
+
+    .input-field:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(110, 153, 139, 0.4);
+    }
+
+    .link-footer {
+        color: var(--color-primary);
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .link-footer:hover {
+        color: var(--color-primary-dark);
+        text-decoration: underline;
+    }
+
+    .footer-button {
+        background-color: rgb(110, 153, 139);
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-weight: 600;
+        padding: 10px 14px;
+        cursor: pointer;
+        transition: transform 0.15s ease-in-out;
+        width: 100%;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                    0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    }
+
+    .footer-button:hover {
+        background-color: rgb(110, 153, 139);
+        transform: translateY(-1px);
+    }
+
+    .social-button {
+        color: white;
+        border: none;
+        border-radius: 9999px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .social-button:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    ::ng-deep .p-password {
+        width: 100%;
+    }
+
+    ::ng-deep .p-password input {
+        width: 100%;
+        padding-right: 2.5rem;
+    }
+
+    ::ng-deep .p-password .p-password-icon {
+        right: 0.75rem;
+        color: rgb(110, 153, 139);
+        cursor: pointer;
+    }
+
+    ::ng-deep .p-password .p-password-icon:hover {
+        color: rgb(88, 128, 115);
+    }
+
+    .link-footer:hover {
+        color: rgb(88, 128, 115);
+        text-decoration: underline;
+    }
+
+    .footer-button:hover,
+    .footer-button:focus,
+    .footer-button:active {
+        background-color: rgb(110, 153, 139) !important;
+        color: white !important;
+    }
+</style>
+

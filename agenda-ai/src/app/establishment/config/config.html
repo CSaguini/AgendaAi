@@ -1,0 +1,189 @@
+<app-navbar-auth></app-navbar-auth>
+
+<div class=" bg-[#C7DED5] min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+  <!-- Toast e ConfirmDialog -->
+  <p-toast></p-toast>
+  <p-confirmdialog></p-confirmdialog>
+
+  <div class="responsabilidade-card p-card">
+    <h2>Termos de Responsabilidade Sobre Exclusão da Empresa</h2>
+
+    <h3>1. Introdução</h3>
+    <p>
+      Estes termos esclarecem as condições e responsabilidades relacionadas à exclusão permanente da sua empresa na plataforma
+      <strong>AgendaAI</strong>. Leia com atenção antes de confirmar, pois esta ação é <strong>irreversível</strong>.
+    </p>
+
+    <h3>2. Exclusão de Dados</h3>
+    <p>
+      Ao confirmar a exclusão, todos os dados vinculados à empresa serão <strong>permanentemente removidos</strong>:
+    </p>
+    <ul>
+      <li>Informações de cadastro e colaboradores;</li>
+      <li>Histórico de agendamentos e clientes;</li>
+      <li>Relatórios e dados financeiros;</li>
+      <li>Integrações e configurações personalizadas.</li>
+    </ul>
+
+    <h3>3. Responsabilidade do Usuário</h3>
+    <ul>
+      <li>O processo é <strong>definitivo</strong> e não pode ser revertido;</li>
+      <li>É responsabilidade do usuário realizar <strong>backup</strong> dos dados antes da exclusão;</li>
+      <li>Informações removidas não poderão ser recuperadas;</li>
+      <li>O acesso será encerrado imediatamente após a exclusão.</li>
+    </ul>
+
+    <h3>4. Consequências</h3>
+    <p>
+      Após a exclusão, a empresa não poderá:
+    </p>
+    <ul>
+      <li>Acessar o painel administrativo;</li>
+      <li>Recuperar clientes, agendamentos ou relatórios antigos;</li>
+      <li>Reativar o cadastro com o mesmo e-mail.</li>
+    </ul>
+
+    <h3>5. Confirmação</h3>
+    <p>
+      Ao prosseguir, o usuário declara estar ciente e de acordo com os termos acima, assumindo total responsabilidade pela exclusão da empresa.
+    </p>
+
+    <div class="data"><em>Última atualização: outubro de 2025</em></div>
+
+    <div class="btns-container">
+      <p-button 
+        label="Cancelar" 
+        severity="secondary" 
+        class="w-full sm:w-auto"
+        routerLink="/establishment/profile">
+      </p-button>
+
+      <p-button 
+        label="Excluir empresa" 
+        severity="danger" 
+        class="w-full sm:w-auto" 
+        (click)="delete($event)">
+      </p-button>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  body {
+    background-color: #f8f9fa;
+    font-family: "Poppins", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .responsabilidade-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    width: 100%;
+    padding: 35px 40px;
+    border: 1px solid #dfe7e4;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .responsabilidade-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+
+  .responsabilidade-card h2 {
+    color: rgb(43, 85, 69);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(153, 197, 182, 0.5);
+    padding-bottom: 10px;
+  }
+
+  .responsabilidade-card h3 {
+    color: rgb(51, 102, 85);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 10px;
+  }
+
+  .responsabilidade-card p,
+  .responsabilidade-card li {
+    color: #444;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .responsabilidade-card ul {
+    margin-left: 22px;
+  }
+
+  .responsabilidade-card strong {
+    color: rgb(43, 85, 69);
+  }
+
+  .responsabilidade-card .data {
+    text-align: right;
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #777;
+    border-top: 1px solid #e3ece9;
+    padding-top: 10px;
+  }
+
+  .btns-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+:host ::ng-deep .p-button-secondary {
+  background-color: #fff !important;        /* Fundo branco */
+  color: #5a5a5a !important;                /* Texto cinza escuro */
+  border: 1px solid #d1d5db !important;     /* Borda cinza clara */
+  box-shadow: none !important;             /* Sem sombra */
+  border-radius: 6px !important;           /* Bordas levemente arredondadas */
+  padding: 0.5rem 1.2rem !important;        /* Padding semelhante */
+  font-weight: 500 !important;              /* Peso da fonte intermediário */
+}
+
+:host ::ng-deep .p-button-secondary:hover {
+  background-color: #f3f4f6 !important;     /* Leve destaque no hover */
+  border-color: #cbd5e1 !important;         /* Cor da borda no hover */
+}
+
+  :host ::ng-deep .p-button-danger {
+    background-color: rgb(202, 77, 77) !important;
+    border: none !important;
+  }
+
+  :host ::ng-deep .p-button-danger:hover {
+    background-color: rgb(176, 61, 61) !important;
+  }
+
+  @media (max-width: 768px) {
+    .responsabilidade-card {
+      padding: 25px;
+    }
+
+    .responsabilidade-card h2 {
+      font-size: 1.5rem;
+    }
+
+    .btns-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    p-button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>
+
+<app-footer></app-footer>

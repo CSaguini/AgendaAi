@@ -1,0 +1,90 @@
+<app-navbar-adm></app-navbar-adm>
+
+<!-- MAIN: -->
+<main class="flex flex-col items-center min-h-[91vh] bg-[#C7DED5] px-3 py-8">
+
+  <!-- Título principal da página -->
+  <h1 class="text-2xl font-bold mb-6">Gerenciamento de Empresas</h1>
+
+  <!-- SECTION:  -->
+  <section class="w-full max-w-7xl">
+
+    <!-- Conteúdo enquanto carrega -->
+    <ng-container *ngIf="loading; else conteudo">
+      <div class="flex justify-center items-center py-20">
+        <p-progressSpinner></p-progressSpinner>
+      </div>
+    </ng-container>
+
+    <!-- Conteúdo quando o carregamento terminou -->
+    <ng-template #conteudo>
+
+      <!-- Se houver empresas listadas -->
+      <ng-container *ngIf="empresas.length > 0; else vazio">
+
+        <!-- GRID: organização das empresas -->
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Cada empresa vira um ARTICLE -->
+          <li *ngFor="let empresa of empresas">
+            <article
+              class="p-5 border border-gray-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all flex flex-col gap-3">
+
+              <!-- Cabeçalho do Card -->
+              <header>
+                <h2 class="text-lg font-semibold">{{empresa.name}}</h2>
+              </header>
+
+              <!-- Endereço -->
+              <p><strong>Cidade:</strong> {{empresa.cidade}} - {{empresa.estado}}</p>
+              <p><strong>Bairro:</strong> {{empresa.bairro}}</p>
+              <p><strong>Endereço:</strong> {{empresa.rua}}, {{empresa.numero}}</p>
+
+              <!-- Contato -->
+              <p><strong>Telefone:</strong> {{empresa.telefone}}</p>
+
+              <!-- Ações: botão de ativar/desativar -->
+              <footer class="flex gap-2 mt-3">
+
+                <!-- Botão "Ativar" -->
+                <button 
+                  class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition-colors flex-1"
+                  *ngIf="!empresa.isActive"
+                  label="Ativar" 
+                  icon="pi pi-check" 
+                  (click)="alterarStatus(empresa._id, true)">
+                  Ativar
+                </button>
+
+                <!-- Botão "Desativar" -->
+                <button 
+                  class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition-colors flex-1"
+                  *ngIf="empresa.isActive"
+                  label="Inativar" 
+                  icon="pi pi-ban" 
+                  (click)="alterarStatus(empresa._id, false)">
+                  Desativar
+                </button>
+
+              </footer>
+
+            </article>
+          </li>
+
+        </ul>
+
+      </ng-container>
+    </ng-template>
+
+    <!-- Quando não há empresas -->
+    <ng-template #vazio>
+      <section class="flex justify-center items-center py-20">
+        <p class="text-xl text-gray-500">Nenhuma empresa encontrada.</p>
+      </section>
+    </ng-template>
+
+  </section>
+
+</main>
+
+<app-footer></app-footer>
